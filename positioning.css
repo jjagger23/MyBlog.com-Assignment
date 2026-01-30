@@ -3,39 +3,38 @@
   --header-height: 78px;
 }
 
-/* Reset */
-*{
-  box-sizing: border-box;
-}
+/* Basic reset */
+* { box-sizing: border-box; }
 
 body{
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #eef4fb;
+  color: #0f172a;
 }
 
-/* Jump menu (left side) */
+/* Jump menu fixed left, full height */
 #jumpMenu{
   position: fixed;
   top: 0;
   left: 0;
   width: var(--menu-width);
-  height: 100vh;
-  padding: 16px 12px;
-  background: #0f2a44;              /* deep navy blue */
-  color: #ffffff;
+  height: 100vh;                 /* spans entire window height */
   overflow-y: auto;
+  padding: 16px 14px;
+  background: #0f2a44;
+  color: #e6f0ff;
 }
 
 #jumpMenu h2{
-  margin-bottom: 12px;
+  margin: 0 0 12px 0;
   font-size: 16px;
   color: #cfe6ff;
 }
 
 #jumpMenu a{
   display: inline-block;
-  padding: 6px 4px;
+  padding: 6px 2px;
   color: #9fd1ff;
   text-decoration: none;
 }
@@ -45,37 +44,41 @@ body{
   text-decoration: underline;
 }
 
-/* Main area */
+/* Main content lives to the right of jump menu */
 main{
   margin-left: var(--menu-width);
-  padding-top: var(--header-height);
   min-height: 100vh;
+  padding-top: var(--header-height); /* prevents header overlap */
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
-/* Fixed header */
+/* Header fixed at top, but starts AFTER the jump menu */
 header{
   position: fixed;
   top: 0;
   left: var(--menu-width);
   width: calc(100% - var(--menu-width));
   height: var(--header-height);
+  z-index: 100;
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: #1f4f8b;              /* strong blue */
-  color: white;
+  justify-content: center; /* centers within MAIN area (ignores menu width) */
+
+  background: #1f4f8b;
+  color: #fff;
   border-bottom: 2px solid #163b66;
-  z-index: 10;
 }
 
-/* Blog title */
+/* Header content: title + buttons */
 header > p{
   margin: 0;
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 800;
 }
 
-/* Header buttons */
+/* the nav inside header */
 header nav{
   margin-left: 18px;
   display: flex;
@@ -84,48 +87,53 @@ header nav{
 
 header button{
   background: #3a78c2;
-  color: white;
+  color: #fff;
   border: none;
   padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 10px;
   font-size: 13px;
+  cursor: pointer;
 }
 
 header button:hover{
   background: #2f65a4;
 }
 
-/* Page heading */
+/* Page title */
 main h1{
-  margin: 20px 18px 10px;
+  margin: 18px 0 12px 0;
+  font-size: 32px;
   color: #1f4f8b;
+  font-weight: 800;
 }
 
-/* Articles container */
+/* Article grid area */
 #container{
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;       /* this is what makes them reorganize on resize */
   gap: 18px;
-  margin: 0 18px 90px;
+  align-items: stretch;
+  margin-bottom: 110px;  /* room so bottom UI doesn’t feel cramped */
 }
 
-/* Individual article cards */
+/* Each article fixed width (hint) */
 #container article{
   width: 300px;
   background: #ffffff;
-  border-radius: 14px;
-  padding: 14px;
   border: 1px solid #cfdff1;
+  border-radius: 14px;
+  padding: 14px 14px 10px 14px;
   box-shadow: 0 6px 16px rgba(31,79,139,0.08);
 }
 
 #container article h2{
-  margin-top: 0;
+  margin: 0 0 10px 0;
+  font-size: 20px;
   color: #1f4f8b;
 }
 
 #container article p{
+  margin: 0 0 10px 0;
   line-height: 1.35;
   font-size: 14px;
   color: #1f2937;
@@ -140,37 +148,54 @@ main h1{
   text-decoration: underline;
 }
 
-/* Thank you block bottom right */
+/* Thank you block always bottom-right */
 #thanks{
   position: fixed;
   right: 16px;
   bottom: 16px;
-  background: #1f4f8b;
-  color: white;
+  margin: 0;
   padding: 10px 14px;
+  background: #1f4f8b;
+  color: #ffffff;
   border-radius: 12px;
   font-size: 14px;
-  box-shadow: 0 8px 20px rgba(31,79,139,0.25);
+  z-index: 200;
+  box-shadow: 0 10px 24px rgba(31,79,139,0.25);
 }
 
-/* Footer */
+/* Footer styling (still part of main flow) */
 footer{
-  margin: 10px 18px 24px;
+  margin: 12px 0 28px 0;
   padding: 16px;
-  background: white;
-  border-radius: 14px;
+  background: #ffffff;
   border: 1px solid #cfdff1;
+  border-radius: 14px;
 }
 
-footer p{
-  font-weight: bold;
+footer > p{
+  margin: 0 0 10px 0;
+  font-weight: 800;
   color: #1f4f8b;
 }
 
 address{
   font-style: normal;
   color: #1f2937;
+}
+
+/* The HTML has one <div> inside address with a bunch of spans */
+address div{
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 6px 10px;
+  gap: 8px 12px;
+  align-items: start;
+}
+
+address a{
+  color: #2f74d0;
+  text-decoration: none;
+}
+
+address a:hover{
+  text-decoration: underline;
 }
