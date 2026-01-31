@@ -1,4 +1,4 @@
-# MyBlog.com-Assignment-
+# MyBlog.com-Assignment
 This project demonstrates the use of CSS positioning and layout techniques to style a blog-style HTML page using an external stylesheet.
 
 The goal of the assignment was to organize the page using fixed and responsive elements while maintaining a clean and readable layout.
