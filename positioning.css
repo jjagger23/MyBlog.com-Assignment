@@ -1,15 +1,23 @@
 :root{
-  /* Left menu size + header split into 2 rows */
+  /* Quick controls so I can tweak layout sizing in one spot */
   --menu-width: clamp(180px, 15vw, 260px);
-  --header-top: 60px;     /* MyBlog.com row */
-  --header-nav: 55px;     /* buttons row */
+
+  /* Header is basically two rows: title row + buttons row */
+  --header-top: 60px;
+  --header-nav: 55px;
   --header-height: calc(var(--header-top) + var(--header-nav));
 }
 
+/* Keeps padding/borders from messing up widths */
 *{
   box-sizing: border-box;
 }
 
+html, body{
+  height: 100%;
+}
+
+/* General page styling */
 body{
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -17,16 +25,19 @@ body{
   color: #0f172a;
 }
 
-/* Left jump menu stays fixed and fills the whole page height */
+/* Left jump menu stays on screen and fills the whole window height */
 #jumpMenu{
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
 
   width: var(--menu-width);
-  padding: 16px 14px;
 
+  /* Makes sure it actually spans top -> bottom of the screen */
+  height: 100vh;
+  bottom: 0;
+
+  padding: 16px 14px;
   background: #0b2545;
   color: #d6e6ff;
 
@@ -50,16 +61,19 @@ body{
   color: #ffffff;
 }
 
-/* Main content starts to the right of the menu */
+/* Everything to the right of the jump menu */
 main{
   margin-left: var(--menu-width);
   min-height: 100vh;
+
+  /* Pushes content down so it doesn't hide behind the fixed header */
   padding-top: var(--header-height);
+
   padding-left: 18px;
   padding-right: 18px;
 }
 
-/* Fixed header: top title bar + bottom nav bar */
+/* Fixed header across the top (but starts after the left menu) */
 header{
   position: fixed;
   top: 0;
@@ -68,19 +82,18 @@ header{
   height: var(--header-height);
 
   background: #1f4f8b;
-  color: white;
-
+  color: #ffffff;
   border-bottom: 2px solid #163b66;
-  z-index: 100;
 
-  /* no extra padding so it looks like a real “bar” */
+  z-index: 100;
   padding: 0;
 }
 
-/* MyBlog.com is centered in the TOP bar only */
+/* Top row of the header: just the site name centered */
 header > p{
   margin: 0;
   height: var(--header-top);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,27 +102,27 @@ header > p{
   font-weight: 800;
 }
 
-/* Nav bar is its own row under the title and spans full width */
+/* Second row: buttons (tabs) under the title */
 header nav{
   height: var(--header-nav);
+
   display: flex;
   align-items: center;
 
-  /* full-width layout */
+  /* Spread buttons across the row like the example */
   justify-content: space-between;
   gap: 14px;
 
-  /* gives the “tabs row” some room */
   padding: 0 40px;
 
-  /* keeps the nav row visually separate */
+  /* Slightly different shade so it feels like a separate bar */
   background: #1a457a;
 }
 
-/* Make each button feel like a wide tab */
+/* Buttons look like tabs and share the space evenly */
 header button{
-  flex: 1;                 /* makes them spread across the row */
-  max-width: 260px;        /* prevents buttons from getting too huge */
+  flex: 1;
+  max-width: 260px;
   height: 40px;
 
   background: #3a78c2;
@@ -125,27 +138,39 @@ header button:hover{
   background: #2f65a4;
 }
 
-/* Main heading */
+/* Main page heading */
 main h1{
   margin: 18px 0 12px;
   font-size: 34px;
   color: #1f4f8b;
+
+  /* Center the title above the article grid */
+  text-align: center;
 }
 
-/* Article cards wrap/reflow when the window changes size */
+/* Article layout: wraps when the window changes size */
 #container{
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
+
+  /* Keeps the grid centered under the main heading */
+  justify-content: center;
+
   margin-bottom: 110px;
 }
 
+/* Individual article cards */
 #container article{
   width: 300px;
-  background: white;
+  background: #ffffff;
+
   border: 1px solid #dde7f5;
   border-radius: 14px;
+
   padding: 14px;
+
+  /* Light shadow just to separate cards from the background */
   box-shadow: 0 6px 14px rgba(31,79,139,0.08);
 }
 
@@ -171,7 +196,7 @@ main h1{
   text-decoration: underline;
 }
 
-/* Always pinned in the bottom-right */
+/* Always pinned in the bottom-right corner */
 #thanks{
   position: fixed;
   right: 16px;
@@ -183,14 +208,16 @@ main h1{
 
   border-radius: 12px;
   font-size: 14px;
+
   z-index: 200;
 }
 
-/* Footer */
+/* Footer styling */
 footer{
   margin: 12px 0 28px;
   padding: 16px;
-  background: white;
+
+  background: #ffffff;
   border: 1px solid #dde7f5;
   border-radius: 14px;
 }
